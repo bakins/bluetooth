@@ -27,18 +27,22 @@ type Adapter struct {
 	connectHandler func(device Device, connected bool)
 }
 
+func NewAdapter() *Adapter {
+	return &Adapter{
+		cm:         cbgo.NewCentralManager(nil),
+		pm:         cbgo.NewPeripheralManager(nil),
+		connectMap: sync.Map{},
+
+		connectHandler: func(device Device, connected bool) {
+			return
+		},
+	}
+}
+
 // DefaultAdapter is the default adapter on the system.
 //
 // Make sure to call Enable() before using it to initialize the adapter.
-var DefaultAdapter = &Adapter{
-	cm:         cbgo.NewCentralManager(nil),
-	pm:         cbgo.NewPeripheralManager(nil),
-	connectMap: sync.Map{},
-
-	connectHandler: func(device Device, connected bool) {
-		return
-	},
-}
+var DefaultAdapter = NewAdapter()
 
 // Enable configures the BLE stack. It must be called before any
 // Bluetooth-related calls (unless otherwise indicated).
@@ -93,7 +97,8 @@ func (cmd *centralManagerDelegate) CentralManagerDidUpdateState(cmgr cbgo.Centra
 
 // DidDiscoverPeripheral when peripheral is discovered.
 func (cmd *centralManagerDelegate) DidDiscoverPeripheral(cmgr cbgo.CentralManager, prph cbgo.Peripheral,
-	advFields cbgo.AdvFields, rssi int) {
+	advFields cbgo.AdvFields, rssi int,
+) {
 	if cmd.a.peripheralFoundHandler != nil {
 		sr := makeScanResult(prph, advFields, rssi)
 		cmd.a.peripheralFoundHandler(cmd.a, sr)
