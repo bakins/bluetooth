@@ -43,7 +43,7 @@ var DefaultAdapter = NewAdapter()
 // Enable configures the BLE stack. It must be called before any
 // Bluetooth-related calls (unless otherwise indicated).
 func (a *Adapter) Enable() (err error) {
-	bus, err := dbus.SystemBus()
+	bus, err := dbus.ConnectSystemBus()
 	if err != nil {
 		return err
 	}

@@ -9,6 +9,7 @@ require (
 	github.com/soypat/cyw43439 v0.0.0-20240609122733-da9153086796
 	github.com/tinygo-org/cbgo v0.0.4
 	golang.org/x/crypto v0.12.0
+	tinygo.org/x/bluetooth v0.10.0
 	tinygo.org/x/drivers v0.26.1-0.20230922160320-ed51435c2ef6
 	tinygo.org/x/tinyfont v0.4.0
 	tinygo.org/x/tinyterm v0.3.0
