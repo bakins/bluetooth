@@ -77,6 +77,10 @@ func (a *Adapter) Enable() error {
 	return nil
 }
 
+func (a *Adapter) Close() error {
+	return nil
+}
+
 // CentralManager delegate functions
 
 type centralManagerDelegate struct {

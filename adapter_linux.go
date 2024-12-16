@@ -62,6 +62,10 @@ func (a *Adapter) Enable() (err error) {
 	return nil
 }
 
+func (a *Adapter) Close() error {
+	return a.bus.Close()
+}
+
 func (a *Adapter) Address() (MACAddress, error) {
 	if a.address == "" {
 		return MACAddress{}, errors.New("adapter not enabled")
