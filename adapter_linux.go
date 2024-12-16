@@ -26,9 +26,9 @@ type Adapter struct {
 	connectHandler func(device Device, connected bool)
 }
 
-func NewAdapter() *Adapter {
+func NewAdapter(adapter string) *Adapter {
 	return &Adapter{
-		id: defaultAdapter,
+		id: adapter,
 		connectHandler: func(device Device, connected bool) {
 		},
 	}
@@ -38,7 +38,7 @@ func NewAdapter() *Adapter {
 // first adapter available.
 //
 // Make sure to call Enable() before using it to initialize the adapter.
-var DefaultAdapter = NewAdapter()
+var DefaultAdapter = NewAdapter(defaultAdapter)
 
 // Enable configures the BLE stack. It must be called before any
 // Bluetooth-related calls (unless otherwise indicated).

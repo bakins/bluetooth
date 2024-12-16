@@ -27,14 +27,13 @@ type Adapter struct {
 	connectHandler func(device Device, connected bool)
 }
 
-func NewAdapter() *Adapter {
+func NewAdapter(adapter string) *Adapter {
 	return &Adapter{
 		cm:         cbgo.NewCentralManager(nil),
 		pm:         cbgo.NewPeripheralManager(nil),
 		connectMap: sync.Map{},
 
 		connectHandler: func(device Device, connected bool) {
-			return
 		},
 	}
 }
@@ -42,7 +41,7 @@ func NewAdapter() *Adapter {
 // DefaultAdapter is the default adapter on the system.
 //
 // Make sure to call Enable() before using it to initialize the adapter.
-var DefaultAdapter = NewAdapter()
+var DefaultAdapter = NewAdapter("")
 
 // Enable configures the BLE stack. It must be called before any
 // Bluetooth-related calls (unless otherwise indicated).
