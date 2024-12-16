@@ -27,6 +27,10 @@ type Adapter struct {
 }
 
 func NewAdapter(adapter string) *Adapter {
+	if adapter == "" {
+		adapter = defaultAdapter
+	}
+
 	return &Adapter{
 		id: adapter,
 		connectHandler: func(device Device, connected bool) {
